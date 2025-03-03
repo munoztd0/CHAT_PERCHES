@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Image Loading</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Image Loading</h1>
+    
+    <h2>Direct Path</h2>
+    <img src="img/chats_to_adopt/romeo.jpg" alt="Romeo - Direct Path">
+    
+    <h2>With ./ Prefix</h2>
+    <img src="./img/chats_to_adopt/romeo.jpg" alt="Romeo - With ./ Prefix">
+    
+    <h2>Absolute Path</h2>
+    <img src="/img/chats_to_adopt/romeo.jpg" alt="Romeo - Absolute Path">
+    
+    <h2>Another Image for Comparison</h2>
+    <img src="img/chats_to_adopt/chili.jpg" alt="Chili - For Comparison">
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            
+            images.forEach(img => {
+                img.onerror = function() {
+                    console.error('Failed to load image:', img.src);
+                    img.style.backgroundColor = '#ffdddd';
+                    img.style.padding = '20px';
+                    img.style.textAlign = 'center';
+                    img.style.color = 'red';
+                    img.style.border = '2px solid red';
+                    
+                    const errorText = document.createElement('p');
+                    errorText.textContent = 'Error loading: ' + img.src;
+                    errorText.style.color = 'red';
+                    img.parentNode.insertBefore(errorText, img.nextSibling);
+                };
+                
+                img.onload = function() {
+                    console.log('Successfully loaded:', img.src);
+                    const successText = document.createElement('p');
+                    successText.textContent = 'Successfully loaded: ' + img.src;
+                    successText.style.color = 'green';
+                    img.parentNode.insertBefore(successText, img.nextSibling);
+                };
+            });
+        });
+    </script>
+</body>
+</html> 
